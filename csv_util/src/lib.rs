@@ -9,6 +9,17 @@ impl Reader {
     pub fn print_data(&self) {
         println!("{:?}", self.data);
     }
+
+    pub fn search(&self, column_name: String, value: String) -> bool {
+        match self.data.get(&column_name) {
+            Some(column) => {
+                column.contains(&value)
+            }
+            _ => {
+                false
+            }
+        }
+    }
 }
 
 pub struct ReaderBuilder {

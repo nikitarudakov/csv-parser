@@ -5,7 +5,7 @@ use csv_util::*;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let (file_path, _column, _value) = parse_args(&args);
+    let (file_path, column, value) = parse_args(&args);
 
     let contents = fs::read_to_string(file_path).unwrap_or_else(|err| {
         panic!("Error reading file {}: {}", file_path, err);
@@ -19,5 +19,13 @@ fn main() {
     };
 
     rdr.print_data();
+
+    println!("column: {}; value: {}", column, value);
+
+    if rdr.search(column.to_string(), value.to_string()) {
+        println!("Found");
+    } else {
+        println!("Not Found");
+    }
 }
 
